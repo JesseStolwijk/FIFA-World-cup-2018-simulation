@@ -17,7 +17,7 @@ namespace WorldCupElo
 		public Run()
 		{
 			bool ended = false;
-			using(var fs = File.OpenRead(@"../../Data/1978.csv"))
+			using(var fs = File.OpenRead(@"../../datahier.csv"))
 			using(var reader = new StreamReader(fs))
 			{
 				while (!reader.EndOfStream)
