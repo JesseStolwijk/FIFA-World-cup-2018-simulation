@@ -1,0 +1,76 @@
+Argentina,,
+Belgium,,
+Bolivia,,
+Brazil,,
+Bulgaria,,
+Cameroon,,
+Colombia,,
+Germany,,
+Greece,,
+Italy,,
+Mexico,,
+Morocco,,
+Netherlands,,
+Nigeria,,
+Norway,,
+Ireland,,
+Romania,,
+Russia,,
+Saudi_Arabia,,
+South_Korea,,
+Spain,,
+Sweden,,
+Switzerland,,
+USA,,
+United States,Switzerland,0.5
+Colombia,Romania,0
+Romania,Switzerland,0
+United States,Colombia,1
+Switzerland,Colombia,0
+United States,Romania,0
+Cameroon,Sweden,0.5
+Brazil,Russia,1
+Brazil,Cameroon,1
+Sweden,Russia,1
+Russia,Cameroon,1
+Brazil,Sweden,0.5
+Germany,Bolivia,1
+Spain,South Korea,0.5
+Germany,Spain,0.5
+South Korea,Bolivia,0.5
+Bolivia,Spain,0
+Germany,South Korea,1
+Argentina,Greece,1
+Nigeria,Bulgaria,1
+Argentina,Nigeria,1
+Bulgaria,Greece,1
+Argentina,Bulgaria,0
+Greece,Nigeria,0
+Italy,Republic of Ireland,0
+Norway,Mexico,1
+Italy,Norway,1
+Mexico,Republic of Ireland,1
+Italy,Mexico,0.5
+Republic of Ireland,Norway,0.5
+Belgium,Morocco,1
+Netherlands,Saudi Arabia,1
+Saudi Arabia,Mexico,1
+Belgium,Netherlands,1
+Belgium,Saudi Arabia,0
+Morocco,Netherlands,0
+Romania,Argentina,1
+Saudi Arabia,Sweden,0
+Netherlands,Republic of Ireland,1
+Brazil,United States,1
+Mexico,Bulgaria,0
+Germany,Belgium,1
+Nigeria,Italy,0
+Spain,Switzerland,1
+Romania,Sweden,0
+Netherlands,Brazil,0
+Bulgaria,Germany,1
+Italy,Spain,1
+Sweden,Brazil,0
+Bulgaria,Italy,0
+Brazil,Italy,1
+Sweden,Bulgaria,1

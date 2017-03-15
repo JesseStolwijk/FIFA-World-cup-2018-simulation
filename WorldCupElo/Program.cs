@@ -12,62 +12,84 @@ namespace WorldCupElo
 	}
 	class Run{
 		public int a;
-		public float k = 25;
 		List<Country> countries = new List<Country>();
 		public Run()
 		{
-			bool ended = false;
-            using (var fs = File.OpenRead(@"datahier.csv"))
-			using(var reader = new StreamReader(fs))
-			{
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
-                    if (!ended)
-                    {
-                        if (values[0] == "EINDE")
-                        {
-                            ended = true;
-                        }
-                        else {
-                            int elo;
-                            if (int.TryParse(values[0], out elo))
-                            {
-                                countries.Add(new Country(values[0], elo));
-                            }
-                            else {
-                                countries.Add(new Country(values[0]));
-                            }
-                        }
-                    }
-                    else {
-                        Country a = (Country)countries.Find(r => r.name == values[0]);
-                        Country b = (Country)countries.Find(r => r.name == values[1]);
-                        float res = float.Parse(values[2]);
+			//execTournament(@"../../data/1994Q.csv");
+			//execTournament(@"../../data/1994T.csv",25);
 
-                        playMatch(new Match(a, b, res));
-                    }
+			execTournament(@"../../data/2002Q.csv",10);
+			execTournament(@"../../data/2002T.csv",32);
 
-                }
-                
-			}
-			countries.Sort ((a, b) =>  -1*a.elo.CompareTo(b.elo));
-			int total = 0;
-			int length=0;
-			foreach (Country c in countries) {
-				total += c.elo;
-				Console.WriteLine ("{0} {1}", c.name, c.elo); 
-				length++;
-			}
-			float avg = total / length;
-			Console.WriteLine ("-----------------");
-			Console.WriteLine ("Avg: {0}",avg.ToString());
+			execTournament(@"../../data/2006Q.csv",10);
+			execTournament(@"../../data/2006T.csv",32);
+
+			//execTournament(@"../../data/2010Q.csv");
+			//execTournament(@"../../data/2010T.csv");
+
+			//execTournament(@"../../data/2014Q.csv");
+			//execTournament(@"../../data/2014T.csv");
+
+			printTournament ();
             Console.ReadKey();
 
         }
+		void execTournament(string loc, float k){
+			bool ended = false;
+			using (var fs = File.OpenRead(loc))
+			using(var reader = new StreamReader(fs))
+			{
+				while (!reader.EndOfStream)
+				{
+					var line = reader.ReadLine();
+					var values = line.Split(',');
+					if (!ended)
+					{
+						if (values[0] == "EINDE")
+						{
+							ended = true;
+						}
+						else {
+							int elo;
+							if (int.TryParse(values[0], out elo))
+							{
+								countries.Add(new Country(values[0], elo));
+							}
+							else {
+								Country c = countries.Find(item => item.name == values[0]);
+								if(c == null)
+									countries.Add(new Country(values[0]));
+							}
+						}
+					}
+					else {
+						Country a = (Country)countries.Find(r => r.name == values[0]);
+						Country b = (Country)countries.Find(r => r.name == values[1]);
+						float res = float.Parse(values[2]);
 
-        void playMatch(Match match){
+						playMatch(new Match(a, b, res), k);
+					}
+
+				}
+
+			}
+		}
+		void printTournament(){
+			countries.Sort ((a, b) =>  -1*a.elo.CompareTo(b.elo));
+			//countries.Sort((a,b) => a.name.CompareTo(b.name));
+			int total = 0;
+			int length=1;
+			foreach (Country c in countries) {
+				total += c.elo;
+				Console.WriteLine ("{0}: {1} {2}", length, c.name, c.elo); 
+				length++;
+			}
+			float avg = total / (length - 1);
+			Console.WriteLine ("-----------------");
+			Console.WriteLine ("Avg: {0}",avg.ToString());
+		}
+
+		void playMatch(Match match, float k){
 			float Ea = 1/(1+10^((match.two.elo - match.one.elo)/400));
 			float Eb = 1 - Ea;
 			match.one.elo += (int)(k * (match.result - Ea));
